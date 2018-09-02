@@ -40,7 +40,7 @@ public class DTypeManaController {
         return dTypeManaService.getAllDTMana();
     }
 
-    @RequestMapping(value = "deviceTypeManagement",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/deviceTypeManagement",method = RequestMethod.DELETE)
     public void delete(@RequestParam int modelId){
         dTypeManaService.deleteDTMana(modelId);
     }
