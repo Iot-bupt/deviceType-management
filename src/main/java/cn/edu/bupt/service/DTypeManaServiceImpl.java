@@ -30,7 +30,6 @@ public class DTypeManaServiceImpl implements DTypeManaService  {
     ModelMapper modelMapper;
 
 
-
     @Override
     @Transactional
     public void addDTMana(DeviceTypeManagement deviceTypeManagement) {
