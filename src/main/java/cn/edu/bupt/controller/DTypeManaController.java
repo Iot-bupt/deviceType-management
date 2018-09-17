@@ -26,10 +26,12 @@ public class DTypeManaController {
         String manufacturerName = obj.has("manufacturerName")?obj.get("manufacturerName").getAsString():null;
         String deviceType = obj.has("deviceType")?obj.get("deviceType").getAsString():null;
         String model = obj.has("model")?obj.get("model").getAsString():null;
+        String icon = obj.has("icon")?obj.get("icon").getAsString():null;
+        Long limit_lifetime = obj.has("limit_lifetime")?obj.get("limit_lifetime").getAsLong():null;
         if(manufacturerName==null||deviceType==null||model==null){
             return null;
         }
-        DeviceTypeManagement dtm = new DeviceTypeManagement(manufacturerName, deviceType, model);
+        DeviceTypeManagement dtm = new DeviceTypeManagement(manufacturerName, deviceType, model, icon, limit_lifetime);
         dTypeManaService.addDTMana(dtm);
         return dtm;
 

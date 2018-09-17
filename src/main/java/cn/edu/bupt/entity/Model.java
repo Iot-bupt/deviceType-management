@@ -9,5 +9,5 @@ public class Model {
     private int deviceTypeId;
     private String modelName;
     private String deviceIcon;
-    private long limitLifetime;
+    private Long limitLifetime;
 }
