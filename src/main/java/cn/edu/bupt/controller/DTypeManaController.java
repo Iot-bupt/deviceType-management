@@ -8,6 +8,7 @@ import cn.edu.bupt.service.DTypeManaService;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +20,9 @@ public class DTypeManaController {
     @Autowired
     DTypeManaService dTypeManaService;
 
+    @PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'saveDeviceType')")
     @RequestMapping(value = "/deviceTypeManagement", method = RequestMethod.POST)
-    public DeviceTypeManagement save(@RequestBody String deviceTypeManagement){
+    public DeviceTypeManagement saveDeviceType(@RequestBody String deviceTypeManagement){
 
         JsonObject obj = (JsonObject)new JsonParser().parse(deviceTypeManagement);
         String manufacturerName = obj.has("manufacturerName")?obj.get("manufacturerName").getAsString():null;
@@ -37,26 +39,31 @@ public class DTypeManaController {
 
     }
 
+    @PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'getAllDeviceType')")
     @RequestMapping(value = "/deviceTypeManagement", method = RequestMethod.GET)
-    public List<DeviceTypeManagement> getAll(){
+    public List<DeviceTypeManagement> getAllDeviceType(){
         return dTypeManaService.getAllDTMana();
     }
 
+    @PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'deleteDeviceType')")
     @RequestMapping(value = "/deviceTypeManagement",method = RequestMethod.DELETE)
-    public void delete(@RequestParam int modelId){
+    public void deleteDeviceType(@RequestParam int modelId){
         dTypeManaService.deleteDTMana(modelId);
     }
 
+    @PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'getManufacturers')")
     @RequestMapping(value = "/deviceTypeManagement/manufactures", method = RequestMethod.GET)
     public List<Manufacturer> getManufacturers(@RequestParam(required = false) String keyword){
         return dTypeManaService.getManufacturersByKeyWords(keyword);
     }
 
+    @PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'getDeviceTypes')")
     @RequestMapping(value = "/deviceTypeManagement/deviceTypes", method = RequestMethod.GET)
     public List<DeviceType> getDeviceTypes(@RequestParam int manufacturerId, @RequestParam(required = false) String keyword){
         return dTypeManaService.getDeviceTypesByKeyWords(manufacturerId,keyword);
     }
 
+    @PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'getModels')")
     @RequestMapping(value = "/deviceTypeManagement/models", method = RequestMethod.GET)
     public List<Model> getModels(@RequestParam int manufacturerId, @RequestParam int deviceTypeId, @RequestParam(required = false)  String keyword){
         return dTypeManaService.getModelsByKeyWords(manufacturerId,deviceTypeId,keyword);
