@@ -26,4 +26,7 @@ public interface ManufacturerMapper {
 
     @Select("select  manufacturer_id as manufacturerId, manufacturer_name as  manufacturerName  from manufacturer where manufacturer_name like CONCAT(CONCAT('%', #{name}), '%')")
     List<Manufacturer> findByKeyWord(String name);
+
+    @Update("UPDATE manufacturer SET manufacturer_name = #{manufacturerName} WHERE manufacturer_id = #{manufacturerId}")
+    void update(@Param("manufacturerId") Integer manufacturerId, @Param("manufacturerName") String manufacturerName);
 }

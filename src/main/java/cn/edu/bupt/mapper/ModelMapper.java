@@ -37,4 +37,7 @@ public interface ModelMapper {
 
     @Delete("delete from model where model_id = #{modelId}")
     void delete(int modelId);
+
+    @Update("UPDATE model SET model_name = #{modelName}, device_icon = #{deviceIcon}, limit_lifetime = #{limitLifetime} WHERE model_id = #{modelId}")
+    void update(@Param("modelId") Integer modelId, @Param("modelName") String modelName, @Param("deviceIcon") String deviceIcon, @Param("limitLifetime") Long limitLifetime);
 }

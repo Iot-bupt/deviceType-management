@@ -5,6 +5,7 @@ import cn.edu.bupt.entity.DeviceTypeManagement;
 import cn.edu.bupt.entity.Manufacturer;
 import cn.edu.bupt.entity.Model;
 import cn.edu.bupt.service.DTypeManaService;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class DTypeManaController {
     @Autowired
     DTypeManaService dTypeManaService;
 
-    @PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'saveDeviceType')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'saveDeviceType')")
     @RequestMapping(value = "/deviceTypeManagement", method = RequestMethod.POST)
     public DeviceTypeManagement saveDeviceType(@RequestBody String deviceTypeManagement){
 
@@ -39,7 +40,23 @@ public class DTypeManaController {
 
     }
 
-    @PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'getAllDeviceType')")
+    //更新设备型号管理。
+    @RequestMapping(value = "/deviceTypeManagement/{modelId}/{deviceTypeId}/{manufacturerId}", method = RequestMethod.PUT)
+    public void updateDeviceType(@PathVariable("modelId") Integer modelId,@PathVariable("deviceTypeId") Integer deviceTypeId,
+                                                 @PathVariable("manufacturerId") Integer manufacturerId, @RequestBody String deviceTypeManagement){
+        JsonObject obj = (JsonObject)new JsonParser().parse(deviceTypeManagement);
+        String manufacturerName = obj.has("manufacturerName")?obj.get("manufacturerName").getAsString():null;
+        String deviceType = obj.has("deviceType")?obj.get("deviceType").getAsString():null;
+        String model = obj.has("model")?obj.get("model").getAsString():null;
+        String icon = obj.has("icon")?obj.get("icon").getAsString():null;
+        Long limit_lifetime = obj.has("limit_lifetime")?obj.get("limit_lifetime").getAsLong():null;
+        dTypeManaService.updateManufacturer(manufacturerId, manufacturerName);
+        dTypeManaService.updateDeviceType(deviceTypeId, deviceType);
+        dTypeManaService.updateModel(modelId, model, icon, limit_lifetime);
+
+    }
+
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'getAllDeviceType')")
     @RequestMapping(value = "/deviceTypeManagement", method = RequestMethod.GET)
     public List<DeviceTypeManagement> getAllDeviceType(){
         return dTypeManaService.getAllDTMana();

@@ -28,4 +28,7 @@ public interface DeviceTypeMapper {
 
     @Delete("delete from device_type where device_type_id = #{deviceTypeId}")
     void delete(int deviceTypeId);
+
+    @Update("UPDATE device_type SET device_type_name = #{deviceTypeName} WHERE device_type_id = #{deviceTypeId}")
+    void update(@Param("deviceTypeId") Integer deviceTypeId, @Param("deviceTypeName") String deviceTypeName);
 }

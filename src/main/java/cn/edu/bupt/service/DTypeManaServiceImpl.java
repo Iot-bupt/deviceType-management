@@ -31,6 +31,31 @@ public class DTypeManaServiceImpl implements DTypeManaService  {
 
 
     @Override
+    public Manufacturer findManufactureByName(String name) {
+         return manufacturerMapper.findManufactureByName(name);
+    }
+
+    @Override
+    public DeviceType findByMidAndName(int manufacturerId, String name) {
+        return deviceTypeMapper.findByMidAndName(manufacturerId, name);
+    }
+
+    @Override
+    public void updateManufacturer(int manufacturerId, String manufacturerName) {
+        manufacturerMapper.update(manufacturerId, manufacturerName);
+    }
+
+    @Override
+    public void updateDeviceType(int deviceTypeId, String deviceTypeName) {
+        deviceTypeMapper.update(deviceTypeId, deviceTypeName);
+    }
+
+    @Override
+    public void updateModel(int modelId, String modelName, String deviceIcon, Long limitLifetime) {
+        modelMapper.update(modelId, modelName, deviceIcon, limitLifetime);
+    }
+
+    @Override
     @Transactional
     public void addDTMana(DeviceTypeManagement deviceTypeManagement) {
         Manufacturer manufacturer = deviceTypeManagement.getManufacturer();
@@ -108,4 +133,5 @@ public class DTypeManaServiceImpl implements DTypeManaService  {
             return modelMapper.findAllByKeyWord(mId,dId,keyWords);
         }
     }
+
 }
