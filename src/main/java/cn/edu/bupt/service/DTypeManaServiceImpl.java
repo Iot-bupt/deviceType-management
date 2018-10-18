@@ -31,6 +31,11 @@ public class DTypeManaServiceImpl implements DTypeManaService  {
 
 
     @Override
+    public Model findById(int modelId) {
+        return modelMapper.findById(modelId);
+    }
+
+    @Override
     public Manufacturer findManufactureByName(String name) {
          return manufacturerMapper.findManufactureByName(name);
     }

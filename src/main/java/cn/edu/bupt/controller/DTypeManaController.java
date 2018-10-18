@@ -21,7 +21,7 @@ public class DTypeManaController {
     @Autowired
     DTypeManaService dTypeManaService;
 
-    //@PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'saveDeviceType')")
+    @PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'saveDeviceType')")
     @RequestMapping(value = "/deviceTypeManagement", method = RequestMethod.POST)
     public DeviceTypeManagement saveDeviceType(@RequestBody String deviceTypeManagement){
 
@@ -41,7 +41,7 @@ public class DTypeManaController {
     }
 
     //更新设备型号管理。
-    @RequestMapping(value = "}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/deviceTypeManagement/{modelId}/{deviceTypeId}/{manufacturerId}}", method = RequestMethod.PUT)
     public void updateDeviceType(@PathVariable("modelId") Integer modelId,@PathVariable("deviceTypeId") Integer deviceTypeId,
                                                  @PathVariable("manufacturerId") Integer manufacturerId, @RequestBody String deviceTypeManagement){
         JsonObject obj = (JsonObject)new JsonParser().parse(deviceTypeManagement);
@@ -56,7 +56,13 @@ public class DTypeManaController {
 
     }
 
-    //@PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'getAllDeviceType')")
+    @PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'getDeviceTypeById')")
+    @RequestMapping(value = "/deviceTypeManagement/{modelId}", method = RequestMethod.GET)
+    public Model getModelById(@PathVariable("modelId") int modelId){
+        return dTypeManaService.findById(modelId);
+    }
+
+    @PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'getAllDeviceType')")
     @RequestMapping(value = "/deviceTypeManagement", method = RequestMethod.GET)
     public List<DeviceTypeManagement> getAllDeviceType(){
         return dTypeManaService.getAllDTMana();

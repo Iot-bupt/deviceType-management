@@ -8,6 +8,7 @@ import cn.edu.bupt.entity.Model;
 import java.util.List;
 
 public interface DTypeManaService {
+    public Model findById(int modelId);
     public Manufacturer findManufactureByName(String name);
     public DeviceType findByMidAndName(int manufacturerId, String name);
     public void updateManufacturer(int manufacturerId, String manufacturerName);
