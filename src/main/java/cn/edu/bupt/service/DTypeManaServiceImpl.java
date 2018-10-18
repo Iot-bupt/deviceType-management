@@ -108,6 +108,18 @@ public class DTypeManaServiceImpl implements DTypeManaService  {
     }
 
     @Override
+    public DeviceTypeManagement getDTManaById(int modelId){
+        Model model = modelMapper.findById(modelId);
+        DeviceTypeManagement deviceTypeManagement = new DeviceTypeManagement();
+        int mid = model.getManufacturerId();
+        int did = model.getDeviceTypeId();
+        deviceTypeManagement.setManufacturer(manufacturerMapper.findManufacturerById(mid));
+        deviceTypeManagement.setDeviceType(deviceTypeMapper.findByDeviceTypeId(did));
+        deviceTypeManagement.setModel(model);
+        return deviceTypeManagement;
+    }
+
+    @Override
     public void deleteDTMana(int modelId) {
         modelMapper.delete(modelId);
     }

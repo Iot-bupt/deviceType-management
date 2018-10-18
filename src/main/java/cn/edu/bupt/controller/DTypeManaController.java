@@ -58,11 +58,11 @@ public class DTypeManaController {
 
 
     @RequestMapping(value = "/deviceTypeManagement/{modelId}", method = RequestMethod.GET)
-    public Model getModelById(@PathVariable("modelId") int modelId){
-        return dTypeManaService.findById(modelId);
+    public DeviceTypeManagement getDTManaById(@PathVariable("modelId") int modelId){
+        return dTypeManaService.getDTManaById(modelId);
     }
 
-    @RequestMapping(value = "/deviceTypeManagement/manufacturer/{manufacturerId}",method = RequestMethod.GET )
+    /*@RequestMapping(value = "/deviceTypeManagement/manufacturer/{manufacturerId}",method = RequestMethod.GET )
     public String getManufacturerName(@PathVariable("manufacturerId") int manufacturerId){
         return dTypeManaService.getManuById(manufacturerId).getManufacturerName();
     }
@@ -70,7 +70,7 @@ public class DTypeManaController {
     @RequestMapping(value = "/deviceTypeManagement/deviceType/{deviceTypeId}",method = RequestMethod.GET )
     public String geDeviceTypeName(@PathVariable("deviceTypeId") int deviceTypeId){
         return dTypeManaService.getDeviceTypeById(deviceTypeId).getDeviceTypeName();
-    }
+    }*/
 
     @PreAuthorize("#oauth2.hasScope('all') OR hasPermission(null ,'getAllDeviceType')")
     @RequestMapping(value = "/deviceTypeManagement", method = RequestMethod.GET)

@@ -22,4 +22,6 @@ public interface DTypeManaService {
     public List<Model> getModelsByKeyWords(int mid, int did, String keyWords);
     public Manufacturer getManuById(int manufacturerId);
     public DeviceType getDeviceTypeById(int deviceTypeId);
+    public DeviceTypeManagement getDTManaById(int modelId);
+
 }
