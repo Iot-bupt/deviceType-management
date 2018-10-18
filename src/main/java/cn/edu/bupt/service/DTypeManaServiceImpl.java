@@ -139,4 +139,14 @@ public class DTypeManaServiceImpl implements DTypeManaService  {
         }
     }
 
+    @Override
+    public Manufacturer getManuById(int manufacturerId){
+        return manufacturerMapper.findManufacturerById(manufacturerId);
+    }
+
+    @Override
+    public DeviceType getDeviceTypeById(int deviceTypeId){
+        return deviceTypeMapper.findByDeviceTypeId(deviceTypeId);
+    }
+
 }
