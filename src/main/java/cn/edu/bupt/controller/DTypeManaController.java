@@ -41,7 +41,7 @@ public class DTypeManaController {
     }
 
     //更新设备型号管理。
-    @RequestMapping(value = "/deviceTypeManagement/{modelId}/{deviceTypeId}/{manufacturerId}}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateManagement/{modelId}/{deviceTypeId}/{manufacturerId}", method = RequestMethod.PUT)
     public void updateDeviceType(@PathVariable("modelId") Integer modelId,@PathVariable("deviceTypeId") Integer deviceTypeId,
                                                  @PathVariable("manufacturerId") Integer manufacturerId, @RequestBody String deviceTypeManagement){
         JsonObject obj = (JsonObject)new JsonParser().parse(deviceTypeManagement);
